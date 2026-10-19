@@ -8,6 +8,12 @@ import { iniciarKeepAliveRender } from './streamlabs.js';
 import { iniciarEscuchaPerks } from './realtime.js';
 import { initNeonRing } from './anilloneon.js';
 
+
+document.getElementById('btnIrRuleta').addEventListener('click', () => {
+
+  window.location.replace('/killer/killer.html'); 
+
+});
 // 1. Escalar el escenario para resoluciones dinámicas
 (function initStageScaler() {
   const DESIGN_W = 1920;

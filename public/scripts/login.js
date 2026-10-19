@@ -26,7 +26,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const data = await res.json();
 
       if (res.ok && data.valido) {
-        window.location.replace('/ruleta/ruleta.html');
+        window.location.replace('/killer/killer.html');
         return;
       }
     } catch (error) {

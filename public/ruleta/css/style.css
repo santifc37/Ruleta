@@ -854,3 +854,10 @@ h1:empty {
 .admin-submenu button:hover {
   background: #555;
 }
+
+.btnIrRuleta {
+  position: fixed;
+  bottom: 20px; 
+  left: 20px;   
+  z-index: 9999; 
+}

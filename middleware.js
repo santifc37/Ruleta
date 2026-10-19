@@ -12,6 +12,5 @@ export default function middleware(request) {
 }
 
 export const config = {
-  // Atrapa /ruleta, /ruleta.html, /ruleta/ruleta.html y cualquier subrecurso
-  matcher: ['/ruleta/:path*', '/ruleta.html'],
+  matcher: '/killer/:path*',
 };

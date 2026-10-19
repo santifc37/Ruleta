@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<title>Preview — Grid Killers v2</title>
+<link rel="stylesheet" href="css/grid.css"/>
+<link rel="stylesheet" href="css/roulette.css" />
+<link rel="stylesheet" href="css/cartas-ui.css">
+</head>
+<body>
+  <main id="stage">
+    <section id="killer-grid" class="killer-grid" aria-label="Grid de killers">
+      <!-- Mantenemos la estructura del HTML original pero invisible (reserva el espacio y altura perfecta) -->
+      <div class="grid-row" style="visibility: hidden;">
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+      </div>
+      <div class="grid-row" style="visibility: hidden;">
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+      </div>
+      <div class="grid-row" style="visibility: hidden;">
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+      </div>
+      <div class="grid-row" style="visibility: hidden;">
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+      </div>
+      <div class="grid-row" style="visibility: hidden;">
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+      </div>
+      <div class="grid-row" style="visibility: hidden;">
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+      </div>
+      <div class="grid-row" style="visibility: hidden;">
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+        <div class="killer-tile active"><img src="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='100' height='100'><rect width='100' height='100'/></svg>" alt="" /></div>
+      </div>
+    </section>
+
+    <div id="roulette-controls">
+      <button id="spin-button" class="spin-button">GIRAR RULETA</button>
+      <button id="cancel-button" class="cancel-button" >CANCELAR GIRO</button>
+    </div>
+
+    <div id="roulette-winner" class="roulette-winner" hidden>
+      <img id="winner-image" alt="" />
+      <span id="winner-name"></span>
+      <button id="continue-button" class="continue-button" type="button">Continuar</button>
+    </div>
+
+    <button class="btnIrRuleta" id="btnIrRuleta">Ir a la nueva ruleta</button>
+  </main>
+  
+<script src="https://cdn.socket.io/4.7.2/socket.io.min.js"></script>
+<script src="js/cartas.js"></script>
+<script src="js/cartas-ui.js"></script>
+<script src="js/votacion.js"></script>
+  <script src="js/grid.js"></script>
+  <script src="js/roulette.js"></script>
+</body>
+</html>
