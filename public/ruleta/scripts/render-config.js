@@ -1,31 +1,16 @@
+const RENDER_URL_RESPALDO = 'https://server-render-ruleta.onrender.com';
 
-let renderUrlPromise;
+export async function obtenerRenderUrl() {
+  try {
+    const response = await fetch('/api/config');
+    if (!response.ok) throw new Error('config no disponible');
 
-export function obtenerRenderUrl() {
-  if (!renderUrlPromise) {
-    renderUrlPromise = fetch('/api/config')
-      .then(async (response) => {
-        if (!response.ok) {
-          throw new Error('No se pudo obtener la configuración de Render');
-        }
-
-        const config = await response.json();
-
-        if (
-          typeof config.renderUrl !== 'string' ||
-          !/^https:\/\/[^/]+$/.test(config.renderUrl)
-        ) {
-          throw new Error('La URL de Render no es válida');
-        }
-
-        return config.renderUrl;
-      })
-      .catch((error) => {
-        // Permite volver a intentarlo si falla la primera petición.
-        renderUrlPromise = null;
-        throw error;
-      });
+    const config = await response.json();
+    if (typeof config.renderUrl === 'string' && /^https:\/\/[^/]+$/.test(config.renderUrl)) {
+      return config.renderUrl;
+    }
+  } catch (error) {
+    console.warn('Usando URL de Render de respaldo:', error);
   }
-
-  return renderUrlPromise;
+  return RENDER_URL_RESPALDO;
 }

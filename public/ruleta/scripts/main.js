@@ -258,7 +258,9 @@ document.addEventListener('DOMContentLoaded', async () => {
     });
 
   } catch (error) {
-    console.error('Error al inicializar la app:', error);
-    ocultarPantallaCarga();
+    console.error('Error al verificar la sesión contra Render:', error);
+    // No redirigir: un fallo de red/config no significa sesión inválida.
+    mostrarErrorConexion?.(); // o simplemente un return con un mensaje en pantalla
+    return;
   }
 });
