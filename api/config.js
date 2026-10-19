@@ -1,10 +1,9 @@
-
 export default function handler(req, res) {
   if (req.method !== 'GET') {
     return res.status(405).json({ error: 'Método no permitido' });
   }
 
-  const renderUrl = process.env.RENDER_URL;
+  const renderUrl = process.env.RENDER_URL || process.env.URL_RENDER;
 
   if (!renderUrl) {
     return res.status(500).json({
