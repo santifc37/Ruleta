@@ -7,7 +7,7 @@ import { renderizarListaOpciones, precargarImagenes, ocultarPantallaCarga, setup
 import { iniciarKeepAliveRender } from './streamlabs.js';
 import { iniciarEscuchaPerks } from './realtime.js';
 import { initNeonRing } from './anilloneon.js';
-
+import { obtenerRenderUrl } from './render-config.js';
 
 document.getElementById('btnIrRuleta').addEventListener('click', () => {
 
@@ -145,7 +145,7 @@ async function inicializarSegundaTabla() {
 }
 
 // URL de tu backend en Render
-const RENDER_URL = 'https://server-render-ruleta.onrender.com/api/verificar';
+
 
 function obtenerCookie(nombre) {
   const nameEQ = nombre + "=";
@@ -184,7 +184,8 @@ function precargarAudios() {
     })
   );
 }
-document.addEventListener("DOMContentLoaded", async () => {
+
+document.addEventListener('DOMContentLoaded', async () => {
   const token = obtenerCookie('token_sesion');
 
   if (!token) {
@@ -193,10 +194,16 @@ document.addEventListener("DOMContentLoaded", async () => {
   }
 
   try {
-    const res = await fetch(`${RENDER_URL}`, {
+    const renderUrl = await obtenerRenderUrl();
+
+    const res = await fetch(`${renderUrl}/api/verificar`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ token: decodeURIComponent(token) })
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        token: decodeURIComponent(token)
+      })
     });
 
     const data = await res.json();
@@ -211,22 +218,24 @@ document.addEventListener("DOMContentLoaded", async () => {
     return;
   }
 
-  // --- Inicialización con precarga global de Recursos ---
+  // Inicialización con precarga global de recursos
   try {
     iniciarKeepAliveRender(300000);
+
     setupUIEventListeners();
     setupWheelEventListeners();
+
     dibujarRuleta();
     dibujarOverlayEstatico();
     iniciarGiroEnEspera();
-     initNeonRing('#ruletaNeon');
+    initNeonRing('#ruletaNeon');
 
-    // 1. Cargar los datos de todas las tablas en state.options
+    // 1. Cargar los datos de todas las tablas
     await inicializarPerks();
     await inicializarDonaciones();
     await inicializarSegundaTabla();
 
-    // 2. Extraer TODAS las URLs de imágenes cargadas en state.options y state.dbPerks
+    // 2. Obtener las URLs de todas las imágenes
     const urlsImagenesTotales = Array.from(
       new Set([
         ...state.dbPerks.map(p => p.img),
@@ -234,20 +243,22 @@ document.addEventListener("DOMContentLoaded", async () => {
       ])
     ).filter(url => url && url.length > 0);
 
-    // 3. Precargar de forma simultánea TODAS las imágenes y sonidos
+    // 3. Precargar imágenes y sonidos simultáneamente
     await Promise.all([
       precargarImagenes(urlsImagenesTotales),
       precargarAudios()
     ]);
 
-    // 4. Una vez descargado absolutamente todo, habilitamos la pantalla
+    // 4. Mostrar la ruleta cuando termine la precarga
     ocultarPantallaCarga();
 
-    iniciarEscuchaPerks(() => {
+    // 5. Escuchar nuevos perks guardados en Render
+    await iniciarEscuchaPerks(() => {
       inicializarDonaciones();
     });
+
   } catch (error) {
     console.error('Error al inicializar la app:', error);
-    ocultarPantallaCarga(); // Fallback de seguridad si falla la red
+    ocultarPantallaCarga();
   }
 });

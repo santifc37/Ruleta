@@ -1,5 +1,9 @@
-// Botón para actualizar la key de forma segura en tu backend de Vercel (si lo usas)
+
+import { obtenerRenderUrl } from './render-config.js';
+
+// Actualizar la clave mediante la API de Vercel.
 const btnSaveKey = document.getElementById('btn-save-key');
+
 if (btnSaveKey) {
   btnSaveKey.addEventListener('click', async () => {
     const password = document.getElementById('admin-pass').value;
@@ -21,74 +25,56 @@ if (btnSaveKey) {
         document.getElementById('admin-pass').value = '';
         document.getElementById('new-streamlabs-key').value = '';
       } else {
-        alert("Error: " + resultado.error);
+        alert('Error: ' + (resultado.error || 'No se pudo actualizar la clave'));
       }
     } catch (error) {
-      console.error("Error de red:", error);
-      alert("Hubo un fallo al conectar con el servidor.");
+      console.error('Error de red:', error);
+      alert('Hubo un fallo al conectar con el servidor.');
     }
   });
 }
 
-// Función para mantener despierto al servidor de Render automáticamente y actualizar la UI
-function mantenerServidorDespierto() {
-  const urlRender = 'https://server-render-ruleta.onrender.com';
+// Única función para comprobar Render y actualizar el indicador visual.
+export function iniciarKeepAliveRender(intervaloMs = 300000) {
+  let detenido = false;
+  let comprobacionEnCurso = false;
 
-  fetch(urlRender)
-    .then(response => response.text())
-    .then(data => {
-      console.log("RESPUESTA DE RENDER:", data);
-      
-      // Buscamos los elementos del DOM en el instante exacto que responde Render
-      const dot = document.getElementById('statusDot');
-      const text = document.getElementById('statusText');
+  const verificarRender = async () => {
+    if (detenido || comprobacionEnCurso) return;
 
-      if (dot) dot.className = 'status-dot online'; // Cambia el punto a verde
-      if (text) text.innerText = 'Online';          // Cambia el texto a Online
-    })
-    .catch(error => {
-      console.error("ERROR DE CONEXIÓN:", error);
-      
-      const dot = document.getElementById('statusDot');
-      const text = document.getElementById('statusText');
+    comprobacionEnCurso = true;
+
+    const dot = document.getElementById('statusDot');
+    const text = document.getElementById('statusText');
+
+    try {
+      const urlRender = await obtenerRenderUrl();
+      const response = await fetch(urlRender);
+
+      if (!response.ok) {
+        throw new Error(`Render respondió con HTTP ${response.status}`);
+      }
+
+      if (dot) dot.className = 'status-dot online';
+      if (text) text.innerText = 'Online';
+
+      console.log('🟢 Render responde correctamente.');
+    } catch (error) {
+      console.error('🔴 Error comprobando Render:', error);
 
       if (dot) dot.className = 'status-dot offline';
       if (text) text.innerText = 'Desconectado';
-    });
-}
-
-// Asegurarnos de que corra al cargar el DOM o de inmediato si ya cargó
-if (document.readyState === 'loading') {
-  window.addEventListener('DOMContentLoaded', mantenerServidorDespierto);
-} else {
-  mantenerServidorDespierto();
-}
-
-// Función para mantener despierto a Render y actualizar la UI
-export function iniciarKeepAliveRender(intervaloMs = 100000) {
-  const urlRender = 'https://server-render-ruleta.onrender.com';
-
-  const verificarYMantenerRender = () => {
-    fetch(urlRender)
-      .then(response => response.text())
-      .then(data => {
-        console.warn("🟢 [RENDER KEEP-ALIVE] Servidor activo:", data);
-        const dot = document.getElementById('statusDot');
-        const text = document.getElementById('statusText');
-        if (dot) dot.className = 'status-dot online';
-        if (text) text.innerText = 'Online';
-      })
-      .catch(error => {
-        console.error("🔴 [RENDER KEEP-ALIVE] Error conectando:", error);
-        const dot = document.getElementById('statusDot');
-        const text = document.getElementById('statusText');
-        if (dot) dot.className = 'status-dot offline';
-        if (text) text.innerText = 'Desconectado';
-      });
+    } finally {
+      comprobacionEnCurso = false;
+    }
   };
 
-  verificarYMantenerRender();                      
-  setInterval(verificarYMantenerRender, intervaloMs);   
+  verificarRender();
+  const intervalId = setInterval(verificarRender, intervaloMs);
+
+  // Permite detener el intervalo si alguna vez se necesita.
+  return () => {
+    detenido = true;
+    clearInterval(intervalId);
+  };
 }
-
-
